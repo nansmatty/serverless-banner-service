@@ -1,0 +1,26 @@
+# "org" ensures this Service is used with the correct Serverless Framework Access Key.
+org: practicetest123
+# "service" is the name of this project. This will also be added to your AWS resource names.
+service: bannerService
+
+provider:
+  name: aws
+  runtime: nodejs22.x
+  region: ap-southeast-1
+  environment:
+    BUCKET_NAME: banner-image-bucket-sls
+
+resources:
+  Resources:
+    BannerImageBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: banner-image-bucket-sls
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - httpApi:
+          path: /
+          method: get
