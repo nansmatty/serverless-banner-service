@@ -9,6 +9,7 @@ provider:
   region: ap-southeast-1
   environment:
     BUCKET_NAME: banner-image-bucket-sls
+    AWS_REGION: ap-southeast-1
 
 resources:
   Resources:
