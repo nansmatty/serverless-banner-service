@@ -4,11 +4,11 @@ const { getSignedUrl } = require('@aws-sdk/s3-request-presigner');
 
 // crearting an S3 client instance with the specified region
 const s3Client = new S3Client({
-	region: process.env.AWS_REGION,
+	region: process.env.REGION,
 });
 
 // Lambda handler function to generate a signed URL for uploading a banner image to S3
-exports.handler = async (event) => {
+exports.getUploadUrl = async (event) => {
 	try {
 		// Extracting the bucket name and key from the event object
 		const bucketName = process.env.BUCKET_NAME;

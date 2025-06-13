@@ -9,7 +9,13 @@ provider:
   region: ap-southeast-1
   environment:
     BUCKET_NAME: banner-image-bucket-sls
-    AWS_REGION: ap-southeast-1
+    REGION: ap-southeast-1
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - s3:PutObject
+      Resource:
+        - arn:aws:s3:::banner-image-bucket-sls/*
 
 resources:
   Resources:
@@ -19,9 +25,9 @@ resources:
         BucketName: banner-image-bucket-sls
 
 functions:
-  hello:
-    handler: handler.hello
+  getUploadUrl:
+    handler: handlers/uploadBanner.getUploadUrl
     events:
       - httpApi:
-          path: /
-          method: get
+          path: /upload-banner
+          method: post
