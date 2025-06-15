@@ -16,6 +16,7 @@ provider:
       Action:
         - s3:PutObject
         - dynamodb:PutItem
+        - dynamodb:Scan
       Resource:
         - arn:aws:s3:::banner-image-bucket-sls/*
         - arn:aws:dynamodb:ap-southeast-1:338175291532:table/Banners
@@ -47,6 +48,12 @@ resources:
             KeyType: HASH
 
 functions:
+  getAllBanners:
+    handler: handlers/getAllBanners.getAllBanners
+    events:
+      - httpApi:
+          path: /banners
+          method: get
   getUploadUrl:
     handler: handlers/uploadBanner.getUploadUrl
     events:
